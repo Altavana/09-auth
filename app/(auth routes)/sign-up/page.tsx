@@ -7,7 +7,7 @@ import { register, RegisterRequest } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/authStore';
 import { ApiError } from '@/app/api/api';
 
-const SignUp = () => {
+export default function SignUp() {
   const router = useRouter();
   const [error, setError] = useState('');
   // Отримуємо метод із стора
@@ -67,6 +67,4 @@ const SignUp = () => {
       </form>
     </main>
   );
-};
-
-export default SignUp;
+}

@@ -3,8 +3,7 @@ import css from './NotePreview.module.css';
 
 import Modal from '@/components/Modal/Modal';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import { fetchNoteById } from '@/lib/api/serverApi';
 import { formatDate } from '@/lib/utils/utils';

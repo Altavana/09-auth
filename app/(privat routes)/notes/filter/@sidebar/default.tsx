@@ -2,7 +2,7 @@ import css from './SidebarNotes.module.css';
 import Link from 'next/link';
 
 const SidebarNotes = async () => {
-  const categories: string[] = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
+  const tags: string[] = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
   return (
     <ul className={css.menuList}>
       <li className={css.menuItem}>
@@ -10,10 +10,10 @@ const SidebarNotes = async () => {
           All notes
         </Link>
       </li>
-      {categories.map(category => (
-        <li key={category} className={css.menuItem}>
-          <Link href={`/notes/filter/${category}`} className={css.menuLink}>
-            {category}
+      {tags.map(tag => (
+        <li key={tag} className={css.menuItem}>
+          <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
+            {tag}
           </Link>
         </li>
       ))}

@@ -6,7 +6,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import NoteList from '@/components/NoteList/NoteList';
 
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { fetchNotes } from '@/lib/api/api';
+import { fetchNotes } from '@/lib/api/clientApi';
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useDebouncedCallback } from 'use-debounce';
@@ -47,7 +47,7 @@ export default function NotesClient({ tag }: NotesClientProps) {
           <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
         )}
 
-        <Link href="/notes/action/create" className={css.button}>
+        <Link href="/notes/action/create" aria-label="Create note" className={css.button}>
           Create note +
         </Link>
       </header>

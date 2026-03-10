@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { formatDate } from '@/lib/utils/utils';
 import { fetchNoteById } from '@/lib/api/clientApi';
 
-const NoteDetailsClient = () => {
+export default function NoteDetailsClient() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
@@ -22,7 +22,7 @@ const NoteDetailsClient = () => {
   };
   if (isLoading) return <p className={css.text}> Loading...</p>;
 
-  if (error || !data) return <p className={css.text}> Some error..</p>;
+  if (error || !data) return <p className={css.text}> Some error...</p>;
 
   return (
     <div className={css.container}>
@@ -39,6 +39,4 @@ const NoteDetailsClient = () => {
       </div>
     </div>
   );
-};
-
-export default NoteDetailsClient;
+}

@@ -5,10 +5,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login, LoginRequest } from '@/lib/api/clientApi';
 import { ApiError } from '@/app/api/api';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function SignIn() {
   const router = useRouter();
   const [error, setError] = useState('');
+  // Отримуємо метод із стора
+  const setUser = useAuthStore(state => state.setUser);
   const handleSubmit = async (formData: FormData) => {
     try {
       // Типізуємо дані форми
@@ -17,6 +20,8 @@ export default function SignIn() {
       const res = await login(formValues);
       // Виконуємо редірект або відображаємо помилку
       if (res) {
+        // Записуємо користувача у глобальний стан
+        setUser(res);
         router.push('/profile');
       } else {
         setError('Invalid email or password');
@@ -56,10 +61,3 @@ export default function SignIn() {
     </main>
   );
 }
-// Форма має надсилати запит до API з підтримкою cookies.
-
-// Оголосіть у файлі lib/api/clientApi.ts функцію для запиту на автентифікацію користувача.
-
-// У разі успішної автентифікації має відбуватись автоматичний редірект користувача на сторінку профілю /profile.
-
-// Додавати специфічні meta-теги на сторінку реєстрації не потрібно.

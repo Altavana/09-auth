@@ -1,23 +1,12 @@
 'use client';
 import css from './NoteForm.module.css';
 import type { NoteTag, NewNote } from '@/types/note.ts';
-// import * as Yup from 'yup';
-import { createNote } from '@/lib/api/api';
+import { createNote } from '@/lib/api/clientApi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useNoteDraftStore } from '@/lib/store/noteStore';
 import { useId, useState } from 'react';
 
-// const NoteFormSchema = Yup.object().shape({
-//   title: Yup.string()
-//     .min(3, 'Name too short')
-//     .max(50, 'Name too long')
-//     .required('Title is required'),
-//   content: Yup.string().max(500, 'Message too long'),
-//   tag: Yup.string()
-//     .oneOf(['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'], 'Invalid tag')
-//     .required('Select tag'),
-// });
 type Errors = {
   title?: string;
   content?: string;

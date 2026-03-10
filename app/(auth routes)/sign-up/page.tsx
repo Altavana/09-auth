@@ -4,18 +4,30 @@ import css from './SignUpPage.module.css';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { register, RegisterRequest } from '@/lib/api/clientApi';
+import { useAuthStore } from '@/lib/store/authStore';
 import { ApiError } from '@/app/api/api';
+
 const SignUp = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+  // Отримуємо метод із стора
+  const setUser = useAuthStore(state => state.setUser);
   const handleSubmit = async (formData: FormData) => {
     try {
       // Типізуємо дані форми
-      const formValues = Object.fromEntries(formData) as RegisterRequest;
+
+      const formValues = Object.fromEntries(formData) as RegisterRequest & {
+        userName: string;
+      };
+
+      const { userName, ...registerData } = formValues;
+
       // Виконуємо запит
-      const res = await register(formValues);
+      const res = await register(registerData);
       // Виконуємо редірект або відображаємо помилку
       if (res) {
+        // Записуємо користувача у глобальний стан
+        setUser(res);
         router.push('/profile');
       } else {
         setError('Invalid email or password');
@@ -30,29 +42,30 @@ const SignUp = () => {
   };
 
   return (
-    <>
-      <div className={css.mainContent}>
-        <h1 className={css.formTitle}>Sign up</h1>
-        <form className={css.form} action={handleSubmit}>
-          <label className={css.container}>
-            Username
-            <input className={css.container} type="text" name="userName" required />
-          </label>
-          <label className={css.container}>
+    <main className={css.mainContent}>
+      <h1 className={css.formTitle}>Sign up</h1>
+      <form className={css.form} action={handleSubmit}>
+        <div className={css.formGroup}>
+          <label htmlFor="email" className={css.formGroup}>
             Email
-            <input className={css.container} type="email" name="email" required />
+            <input className={css.input} id="email" type="email" name="email" required />
           </label>
-          <label className={css.container}>
+        </div>
+        <div className={css.formGroup}>
+          <label htmlFor="password" className={css.formGroup}>
             Password
-            <input className={css.container} type="password" name="password" required />
+            <input className={css.input} id="password" type="password" name="password" required />
           </label>
-          <button className={css.container} type="submit">
+        </div>
+        <div className={css.actions}>
+          <button className={css.submitButton} type="submit">
             Register
           </button>
-        </form>
-        {error && <p>{error}</p>}
-      </div>
-    </>
+        </div>
+
+        {error && <p className={css.error}>{error} </p>}
+      </form>
+    </main>
   );
 };
 

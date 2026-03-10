@@ -1,5 +1,6 @@
 'use client';
 import css from './error.module.css';
+
 interface ErrProps {
   error: Error;
 }

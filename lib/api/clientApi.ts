@@ -14,9 +14,9 @@ export const fetchNotes = async (
 ): Promise<FetchNotesResponse> => {
   const response = await nextServer.get<FetchNotesResponse>('/notes', {
     params: {
-      ...(search !== '' && { search }),
-      tag,
-      page: page,
+      ...(search !== undefined && { search }),
+      ...(page !== undefined && { page }),
+      ...(tag !== undefined && { tag }),
       perPage: 12,
     },
   });
@@ -71,11 +71,8 @@ export const getMe = async () => {
   const { data } = await nextServer.get<User>('/users/me');
   return data;
 };
-type updateMeProp = {
-  username: string;
-  email: string;
-};
-export const updateMe = async (updateUser: updateMeProp) => {
-  const { data } = await nextServer.patch<User>('/users/me', updateUser);
+
+export const updateMe = async (username: string) => {
+  const { data } = await nextServer.patch<User>('/users/me', { username });
   return data;
 };

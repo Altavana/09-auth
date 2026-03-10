@@ -13,21 +13,17 @@ const EditProfilePage = () => {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
-    const username = formData.get('username');
-    if ((username as string).length === 0) {
-      toast.error('Please change username or press Cancel');
-      return;
-    }
+    const username = formData.get('username') as string;
+
     if (!username) {
       toast.error('Some error...');
       return;
     }
-
-    const updateUser = {
-      username: username as string,
-      email: user.email as string,
-    };
-    const res = await updateMe(updateUser);
+    if (username.length === 0) {
+      toast.error('Please change username or press Cancel');
+      return;
+    }
+    const res = await updateMe(username);
     if (res) {
       const updatedUser = await getMe();
       setUser(updatedUser);

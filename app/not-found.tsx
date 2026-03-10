@@ -2,8 +2,6 @@ import Link from 'next/link';
 import css from './Home.module.css';
 import { Metadata } from 'next';
 
-const SITE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
-
 export const metadata: Metadata = {
   title: '404 - Page Not Found | NoteHub',
   description:
@@ -12,7 +10,7 @@ export const metadata: Metadata = {
     title: '404 - Page Not Found | NoteHub',
     description:
       'The page you are looking for could not be found. Go back to NoteHub and continue organizing your notes.',
-    url: `${SITE_URL}/404`,
+    url: 'https://09-auth-su7a.vercel.app/404',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/og-meta.jpg',

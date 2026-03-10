@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: 'NoteHub - Smart Note Management',
     description:
       'An app for managing your notes and reminders with tags based on your areas of work  or another part of life',
-    url: 'https://08-zustand-three-cyan.vercel.app/',
+    url: 'https://09-auth-su7a.vercel.app/',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/og-meta.jpg',

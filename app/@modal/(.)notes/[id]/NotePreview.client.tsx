@@ -5,7 +5,7 @@ import Modal from '@/components/Modal/Modal';
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useRouter } from 'next/navigation';
 
-import { fetchNoteById } from '@/lib/api/serverApi';
+import { fetchNoteById } from '@/lib/api/clientApi';
 import { formatDate } from '@/lib/utils/utils';
 
 const NotePreviewClient = () => {
